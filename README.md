@@ -25,6 +25,14 @@ this follow files and folders will be created after install
 ```
 Don't forget to change __environment variables__ in `.env`
 
+## Console
+
+To use in command-line interface
+
+```
+php run {command}
+```
+
 ## Tests
 
 We use phpunit for automate test
