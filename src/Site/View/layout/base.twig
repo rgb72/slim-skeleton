@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang  }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ meta.title }}</title>
+    <meta http-equiv="Content-Language" content="{{ static('html.meta.content_language') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google" content="notranslate">
+
+    <meta name="description" content="{{ meta.description }}">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="canonical" href="{{ canonical ?: current_url }}">
+
+    <base href="{{ base_url() }}/">
+
+    <meta property="fb:app_id" content="{{ facebook_app_id }}">
+    <meta property="og:url" content="{{ current_url }}">
+    <meta property="og:type" content="{{ meta.og_type ?: 'website' }}">
+    <meta property="og:title" content="{{ meta.og_title ?: meta.title }}">
+    <meta property="og:image" content="{{ meta.og_image }}">
+    <meta property="og:description" content="{{ meta.og_description ?: meta.description }}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    {% block head %}{% endblock %}
+
+    <link rel="stylesheet" href="dist/app/main.css">
+    {% block stylesheet %}{% endblock %}
+</head>
+<body>
+
+    {% block header %}
+        {% include 'layout/header.twig' ignore missing %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+        {% include 'layout/footer.twig' ignore missing %}
+    {% endblock %}
+
+    <script type="text/javascript">
+        window.lang = '{{ current_lang }}'
+    </script>
+    <script type="text/javascript" src="dist/app/main.js"></script>
+    {% block javascript %}{% endblock %}
+</body>
+</html>

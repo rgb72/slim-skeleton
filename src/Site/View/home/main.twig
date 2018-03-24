@@ -1,0 +1,15 @@
+{% extends 'layout/base.twig' %}
+
+{% block content %}
+    <h1>Hello {{ name ?: 'world' }}</h1>
+    <p>
+        {{ static('home/main.paragraph') }}
+    </p>
+    <ul>
+        {% for item in static('home/main.list') %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <button>{{ static('home/main.button') }}</button>
+    <a href="#">{{ static('home/main.link') }}</a>
+{% endblock %}

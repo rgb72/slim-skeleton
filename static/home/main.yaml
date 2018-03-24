@@ -1,0 +1,10 @@
+paragraph: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod porro modi repellat ea, dolorem quidem ipsum ratione itaque cum dignissimos quae sit eligendi fuga ipsa dolore aut id facilis ipsam.
+button:
+  th: ตกลง
+  en: ok
+link:
+  en: go to homepage
+list:
+  - A
+  - B
+  - C
