@@ -8,7 +8,7 @@
 ## Getting Started
 Install package with composer
 
-```php
+```
 composer install
 ```
 this follow files and folders will be created after install
@@ -37,7 +37,7 @@ php run {command}
 
 We use phpunit for automate test
 
-```php
+```
 composer test
 
 ```
