@@ -39,7 +39,10 @@
         }
     },
     "config" : {
-        "vendor-dir" : "vendor"
+        "vendor-dir" : "vendor",
+        "gitlab-token": {
+            "gitlab.com": "7oTxLkWjdvXtzh3fMtDc"
+        }
     },
     "scripts" : {
         "post-install-cmd": [
