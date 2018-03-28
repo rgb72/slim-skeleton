@@ -39,13 +39,10 @@
         }
     },
     "config" : {
-        "vendor-dir" : "vendor",
-        "gitlab-token": {
-            "gitlab.com": "7oTxLkWjdvXtzh3fMtDc"
-        }
+        "vendor-dir" : "vendor"
     },
     "scripts" : {
-        "post-install-cmd": [
+        "post-create-project-cmd": [
             "mkdir -p storage/{cache,database,logs,report}",
             "mkdir -p storage/cache/{templates,variables}",
             "chmod -R 777 storage",
