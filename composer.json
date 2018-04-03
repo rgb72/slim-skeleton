@@ -1,5 +1,5 @@
 {
-    "name": "rgb72/skeleton",
+    "name": "rgb72/slim-skeleton",
     "description": "slim skeleton by rgb72",
     "authors": [
         {
@@ -42,7 +42,7 @@
         "vendor-dir" : "vendor"
     },
     "scripts" : {
-        "post-install-cmd": [
+        "post-create-project-cmd": [
             "mkdir -p storage/{cache,database,logs,report}",
             "mkdir -p storage/cache/{templates,variables}",
             "chmod -R 777 storage",
