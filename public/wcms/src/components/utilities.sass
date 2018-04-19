@@ -1,0 +1,15 @@
+$justify-content: start end center between around
+$justify-content-value: flex-start flex-end center space-between space-around
+
+@each $content in $justify-content
+    $i: index($justify-content, $content)
+    .is-justify-content-#{$content}
+        justify-content: nth($justify-content-value, $i)
+
+$align-items: stretch center start end baseline
+$align-items-value: stretch center flex-start flex-end baseline
+
+@each $content in $align-items
+    $i: index($align-items, $content)
+    .is-align-items-#{$content}
+        align-items: nth($align-items-value, $i)

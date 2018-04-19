@@ -2,4 +2,7 @@
 .DS_Store
 .env
 /storage
-public/dist
+dist
+*-error.log
+/node_modules
+
