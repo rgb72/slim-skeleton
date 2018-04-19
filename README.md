@@ -14,14 +14,14 @@ composer install
 this follow files and folders will be created after install
 
 ```
-|- .env
-|- storage
-    |- cache
-    |   |- templates
-    |   |- variables
-    |- database
-    |- logs
-    |- report
+├─ .env
+└─ storage
+    ├─ cache
+    │   ├─ templates
+    │   └─ variables
+    ├─ database
+    ├─ logs
+    └─ report
 ```
 Don't forget to change __environment variables__ in `.env`
 
