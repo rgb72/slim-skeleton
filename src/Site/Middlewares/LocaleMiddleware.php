@@ -15,8 +15,10 @@ class LocaleMiddleware {
     }
 
     public function __invoke(Request $request, Response $response, $next) {
-        $lang = $request->getAttribute('route')->getArgument('lang');
-        $this->container['lang'] = !is_null($lang) ? $lang : getenv('LANG_DEFAULT');
+        if(getenv('IS_MULTIPLE_LANG') !== 'false') {
+            $lang = $request->getAttribute('route')->getArgument('lang');
+            $this->container['lang'] = !is_null($lang) ? $lang : getenv('LANG_DEFAULT');
+        }
 
         return $next($request, $response);
     }
