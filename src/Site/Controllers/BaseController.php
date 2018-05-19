@@ -2,19 +2,18 @@
 
 namespace App\Site\Controllers;
 
-use App\Services\Service;
+use App\Models\Configure;
+use App\Models\Meta;
 
 class BaseController {
 
     protected $container;
     protected $view;
-    protected $service;
     protected $config;
 
     public function __construct($container) {
         $this->container = $container;
         $this->view      = $container->get('view');
-        $this->service   = new Service;
 
         $this->getConfig();
 
@@ -25,18 +24,19 @@ class BaseController {
     protected function setTwigGlobalVariable() {
         $twig = $this->view->getEnvironment();
 
-        $twig->addGlobal('current_lang', $this->container->lang);
+        if($this->container->has('lang'))
+            $twig->addGlobal('current_lang', $this->container->lang);
         $twig->addGlobal('current_url', (string)$this->container->request->getUri()->withQuery(''));
     }
 
     protected function getConfig() {
-        $this->config = $this->service->configure->all()->keyBy('variable')->map(function($item) {
+        $this->config = Configure::all()->keyBy('variable')->map(function($item) {
             return $item->value;
         });
     }
 
     protected function setMeta($page, $ref_id = null, Array $replace = []) {
-        $meta = $this->service->meta->getByPage($page, $ref_id);
+        $meta = Meta::where('page', $page)->where('ref_id', $ref_id)->first();
 
         if(is_null($meta)) $meta = (object)[];
 

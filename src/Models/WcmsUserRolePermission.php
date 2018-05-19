@@ -8,7 +8,14 @@ class WcmsUserRolePermission extends Model {
 
     public $timestamps = false;
 
-    protected $fillable = ['module_id', 'action_view', 'action_create', 'action_update', 'action_delete', 'action_export'];
+    protected $fillable = [
+        'module_id',
+        'action_view',
+        'action_create',
+        'action_update',
+        'action_delete',
+        'action_export'
+    ];
 
     public function module() {
         return $this->belongsTo(WcmsModule::class, 'module_id');

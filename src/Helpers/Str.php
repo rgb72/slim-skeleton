@@ -2,7 +2,11 @@
 
 namespace App\Helpers;
 
-class String {
+class Str {
+
+    public static function random($length = 25) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1, $length);
+    }
 
     public static function decamelize($string, $splitter = '_') {
         $string = preg_replace('/(?!^)[[:upper:]][[:lower:]]/', '$0', preg_replace('/(?!^)[[:upper:]]+/', $splitter.'$0', $string));
