@@ -1,7 +1,3 @@
-require('dotenv').config({
-    path: '../.env'
-})
-
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
@@ -9,6 +5,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const { resolve } = require('./util')
 const webpackConfig = require('./webpack.config.base')
+
+require('dotenv').config({
+    path: resolve('../.env')
+})
 
 module.exports = merge(webpackConfig, {
     entry: {

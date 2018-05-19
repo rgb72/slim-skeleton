@@ -10,6 +10,10 @@ class WcmsUser extends Model {
 
     protected $hidden = ['password'];
 
+    public function scopeActive($query) {
+        $query->where('avaliable', 1);
+    }
+
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = sha1(trim($password));
     }

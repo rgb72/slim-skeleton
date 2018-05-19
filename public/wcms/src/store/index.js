@@ -11,9 +11,6 @@ import wcmsUserRole from './wcmsUserRole'
 import me from './me'
 import email from './email'
 import tagging from './tagging'
-import booking from './booking'
-import companyType from './companyType'
-import survey from './survey'
 
 export default new Vuex.Store({
     modules: {
@@ -24,9 +21,6 @@ export default new Vuex.Store({
         wcmsUserRole,
         me,
         email,
-        tagging,
-        booking,
-        companyType,
-        survey
+        tagging
     }
 })

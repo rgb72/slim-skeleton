@@ -30,6 +30,11 @@ const PaginationView = () => import('@/components/Layout/Pagination.vue')
 const ActionView = () => import('@/components/Layout/Action.vue')
 const AdvanceInput = () => import('@/components/Layout/AdvanceInput')
 const MetaView = () => import('@/components/Layout/Meta.vue')
+const FileUpload = () => import('@/components/Layout/FileUpload')
+const FileUploadPreview = () => import('@/components/Layout/FileUpload/Preview')
+const Datepicker = () => import('@/components/Layout/Datepicker')
+
+const ListView = () => import('@/components/Layout/List.vue')
 
 Vue.component('Tabs', Tabs)
 Vue.component('TabPane', TabPane)
@@ -38,6 +43,48 @@ Vue.component('PaginationView', PaginationView)
 Vue.component('ActionView', ActionView)
 Vue.component('AdvanceInput', AdvanceInput)
 Vue.component('MetaView', MetaView)
+Vue.component('FileUpload', FileUpload)
+Vue.component('FileUploadPreview', FileUploadPreview)
+Vue.component('Datepicker', Datepicker)
+Vue.component('ListView', ListView)
+
+import store from './store'
+
+import VueQuillEditor from 'vue-quill-editor'
+import { quillRedefine } from 'vue-quill-editor-upload'
+
+const quillOptions = quillRedefine({
+    theme: 'snow',
+    toolOptions: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [ 'bold', 'italic', 'underline', 'strike' ],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'script': 'super' }, { 'script': 'sub' }],
+        [ 'blockquote', 'code-block' ],
+        [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+        [ 'direction', { 'align': [] }],
+        [ 'link', 'image', 'video', 'formula' ],
+        [ 'clean' ]
+    ],
+    uploadConfig: {
+        action: '/wcms/api/uploads',
+        name: 'file',
+        accept: 'image/*',
+        header (xhr, formData) {
+            xhr.setRequestHeader('Authorization', `Bearer ${store.getters['auth/token']}`)
+        },
+        res (response) {
+            return response.url
+        }
+    }
+})
+Vue.use(VueQuillEditor, quillOptions)
+
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+
+import katex from 'katex'
+window.katex = katex
 
 import FileManager from '@/libs/FileManager'
 Vue.use(FileManager)
@@ -147,7 +194,14 @@ body
     .section
         padding: 1rem .75rem
 
+.ql-container
+    max-height: 75vh
+    overflow: scroll
+
+.ql-editor
+    // put editor style
 </style>
+
 
 <style lang="sass" scoped>
 .column.is-fullheight

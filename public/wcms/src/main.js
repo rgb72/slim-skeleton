@@ -6,7 +6,6 @@ import NProgress from 'vue-nprogress'
 import VueConfig from 'vue-config'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
-import VueHighlightJS from 'vue-highlightjs'
 
 import App from './App'
 import router from './router'
@@ -20,11 +19,10 @@ Vue.http.options.root = '/wcms/api'
 Vue.config.productionTip = false
 
 Vue.use(VueConfig, {
-  uploadUrl: Vue.http.options.root + '/files'
+    uploadUrl: Vue.http.options.root + '/uploads'
 })
 
 Vue.use(VueLodash, lodash)
-Vue.use(VueHighlightJS)
 
 sync(store, router)
 

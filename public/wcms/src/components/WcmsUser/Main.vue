@@ -1,98 +1,84 @@
 <template>
-    <section class="section">
-        <nav class="level">
-            <div class="level-left">
-                <div class="level-item">
-                    <title-view :breadcrumbs="['User Management']"></title-view>
-                </div>
-            </div>
-            <div class="level-right" v-if="module.action_create">
-                <router-link :to="{name: 'wcms-user.create'}" class="button is-primary">Create</router-link>
-            </div>
-        </nav>
-
-        <div class="content has-table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in content.data">
-                        <td>{{item.username}}</td>
-                        <td>{{item.name}}</td>
-                        <td>
-                            <a class="tag is-success" v-if="item.avaliable" @click="unavaliable(item.id)">Avaliable</a>
-                            <a class="tag is-danger" v-else @click="avaliable(item.id)">Unavaliable</a>
-                        </td>
-                        <td>
-                            <action-view info-name="wcms-user.info" :info-id="item.id" :remove="remove(item.id)"></action-view>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <pagination-view :pagination="content.pagination"></pagination-view>
-    </section>
+    <list-view
+        :routes="routes"
+        :breadcrumbs="breadcrumbs"
+        :content="content.data"
+        :contentName="contentName"
+        :title="title"
+        :pagination="contentPagination"
+        @edit="edit"
+        @remove="remove"
+    />
 </template>
 
 <script>
+import Moment from 'moment'
+
 export default {
+    data () {
+        return {
+            routes: {
+                create: 'wcms-user.create',
+                info: 'wcms-user.info'
+            },
+            breadcrumbs: ['Product'],
+            title: ['Username', 'Name', 'Status'],
+            contentName: [
+                'username',
+                'name',
+                {
+                    name: 'avaliable',
+                    type: Boolean
+                }
+            ],
+        }
+    },
     computed: {
         content () {
-            return this.$store.getters['wcmsUser/list']
+            return this.$store.getters['wcmsUser/list'] || {}
         },
-        module () {
-            return this.$store.getters['me/module_info'] || {}
+        contentPagination () {
+            return {
+                current_page: this.content.current_page,
+                from: this.content.from,
+                last_page: this.content.last_page,
+                per_page: this.content.per_page,
+                to: this.content.to,
+                total: this.content.total
+            }
         }
     },
     methods: {
         fetchData () {
             this.$store.dispatch('wcmsUser/getList', this.$route.query)
         },
-        unavaliable (id) {
-            this.$store.dispatch('wcmsUser/unavaliable', id).then(response => {
-                this.fetchData()
-            }).catch(response => {
-                this.$swal({
-                    type: 'error',
-                    title: response.message
-                })
-            })
-        },
-        avaliable (id) {
-            this.$store.dispatch('wcmsUser/avaliable', id).then(response => {
-                this.fetchData()
-            }).catch(response => {
-                this.$swal({
-                    type: 'error',
-                    title: response.message
-                })
+        edit (id) {
+            this.$router.push({
+                name: this.routes.info,
+                params: {
+                    id
+                },
+                query: {
+                    redirect: this.$route.fullPath
+                }
             })
         },
         remove (id) {
-            return () => {
-                this.$swal({
-                    title: 'Remove ' + id + ' ?',
-                    showCancelButton: true
-                }).then(result => {
-                    this.$store.dispatch('wcmsUser/remove', id).then(response => {
-                        this.$swal('Removed')
-                        this.fetchData()
-                    })
-                    .catch(response => {
-                        this.$swal({
-                            type: 'error',
-                            title: response.message
-                        })
+            this.$swal({
+                title: 'Remove ' + id + ' ?',
+                showCancelButton: true
+            }).then(result => {
+                this.$store.dispatch('wcmsUser/remove', id).then(response => {
+                    this.$swal('Removed')
+                    this.fetchData()
+                })
+                .catch(response => {
+                    this.$swal({
+                        type: 'error',
+                        title: response.message
                     })
                 })
-            }
+            })
         }
     },
     mounted () {

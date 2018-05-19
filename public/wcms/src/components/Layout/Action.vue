@@ -1,55 +1,55 @@
 <template>
     <div class="action">
         <tooltip :label="viewLabel" placement="top">
-            <a class="button is-info" v-if="hasView && isView" @click="viewCallback">
+            <a class="button is-info" v-if="hasView && isView" @click="$emit('view')">
                 <span class="icon">
                     <i class="fa fa-eye"></i>
                 </span>
             </a>
         </tooltip>
         <tooltip :label="editLabel" placement="top">
-            <a class="button is-warning" v-if="hasEdit && isEdit" @click="editCallback">
+            <a class="button is-warning" v-if="hasEdit && isEdit" @click="$emit('edit')">
                 <span class="icon">
                     <i class="fa fa-pencil"></i>
                 </span>
             </a>
         </tooltip>
         <tooltip :label="deleteLabel" placement="top">
-            <a class="button is-danger" v-if="hasDelete && isDelete" @click="remove">
+            <a class="button is-danger" v-if="hasDelete && isDelete" @click="$emit('remove')">
                 <span class="icon">
                     <i class="fa fa-times"></i>
                 </span>
             </a>
         </tooltip>
         <template v-if="hasMove && isEdit">
-            <!-- <tooltip label="move to first" placement="top">
-                <a class="button" @click="move('first')">
+            <tooltip label="move to top" placement="top">
+                <a class="button"  @click="$emit('moveTop')">
                     <span class="icon">
                         <i class="fa fa-angle-double-up"></i>
                     </span>
                 </a>
-            </tooltip> -->
+            </tooltip>
             <tooltip label="move up" placement="top">
-                <a class="button is-success" @click="move('up')">
+                <a class="button is-success"  @click="$emit('moveUp')">
                     <span class="icon">
                         <i class="fa fa-angle-up"></i>
                     </span>
                 </a>
             </tooltip>
             <tooltip label="move down" placement="top">
-                <a class="button is-success" @click="move('down')">
+                <a class="button is-success"  @click="$emit('moveDown')">
                     <span class="icon">
                         <i class="fa fa-angle-down"></i>
                     </span>
                 </a>
             </tooltip>
-           <!--  <tooltip label="move to last" placement="top">
-                <a class="button" @click="move('last')">
+            <tooltip label="move to last" placement="top">
+                <a class="button"  @click="$emit('moveLast')">
                     <span class="icon">
                         <i class="fa fa-angle-double-down"></i>
                     </span>
                 </a>
-            </tooltip> -->
+            </tooltip>
         </template>
     </div>
 </template>
@@ -130,29 +130,6 @@ export default {
         },
         deleteLabel () {
             return 'delete ' + (this.label || this.infoId)
-        }
-    },
-    methods: {
-        viewCallback () {
-            if(this.view === undefined) this.goToInfo()
-            else this.view()
-        },
-        editCallback () {
-            if(this.edit === undefined) this.goToInfo()
-            else this.edit()
-        },
-        goToInfo () {
-            if(this.infoName === null || this.infoId === null) return
-
-            this.$router.push({
-                name: this.infoName,
-                params: {
-                    id: this.infoId
-                },
-                query: {
-                    redirect: this.$route.fullPath
-                }
-            })
         }
     }
 }

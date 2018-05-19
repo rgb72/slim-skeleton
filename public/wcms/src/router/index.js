@@ -9,8 +9,6 @@ import CustomTaggingRoute from '@/router/customTagging'
 import WcmsUserRoleRoute from '@/router/wcmsUserRole'
 import WcmsUserRoute from '@/router/wcmsUser'
 import WcmsUserProfileRoute from '@/router/wcmsUserProfile'
-import BookingRoute from '@/router/booking'
-import SurveyRoute from '@/router/survey'
 
 Vue.use(Router)
 
@@ -26,8 +24,6 @@ export default new Router({
         ...WcmsUserRoleRoute,
         ...WcmsUserRoute,
         ...WcmsUserProfileRoute,
-        ...BookingRoute,
-        ...SurveyRoute,
         {
             path: '/login',
             name: 'login',

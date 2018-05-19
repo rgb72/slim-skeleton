@@ -13,7 +13,7 @@
                 <div class="column is-8">
                     <div class="client">
                         <h3 class="subtitle">Content Management for</h3>
-                        <h2 class="title is-3">Meiji-museum</h2>
+                        <h2 class="title is-3">SKELETON</h2>
                     </div>
                     <form @submit.prevent="login">
                         <div class="field">

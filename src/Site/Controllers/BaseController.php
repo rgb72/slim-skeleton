@@ -25,7 +25,8 @@ class BaseController {
     protected function setTwigGlobalVariable() {
         $twig = $this->view->getEnvironment();
 
-        $twig->addGlobal('current_lang', $this->container->lang);
+        if($this->container->has('lang'))
+            $twig->addGlobal('current_lang', $this->container->lang);
         $twig->addGlobal('current_url', (string)$this->container->request->getUri()->withQuery(''));
     }
 
