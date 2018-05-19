@@ -45,12 +45,14 @@
         "post-create-project-cmd": [
             "mkdir -p storage/{cache,database,logs,report}",
             "mkdir -p storage/cache/{templates,variables}",
+            "mkdir -p public/uploads",
             "chmod -R 777 storage",
             "cp -n .env.example .env"
         ],
         "post-install-cmd": [
             "mkdir -p storage/{cache,database,logs,report}",
             "mkdir -p storage/cache/{templates,variables}",
+            "mkdir -p public/uploads",
             "chmod -R 777 storage",
             "cp -n .env.example .env"
         ],
