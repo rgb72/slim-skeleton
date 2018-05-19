@@ -11,7 +11,7 @@ class WcmsUser extends Model {
     protected $hidden = ['password'];
 
     public function scopeActive($query) {
-        $query->where('avaliable', 1);
+        $query->where('avaliable', true);
     }
 
     public function setPasswordAttribute($password) {

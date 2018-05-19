@@ -83,7 +83,7 @@ class MeController {
     }
 
     public function moduleInfo(Request $request, Response $response, Array $args) {
-        $token = $request->getAttribute('user');
+        $user = $request->getAttribute('user');
         $name = $args['name'];
 
         $module = WcmsDefaultModule::where('name', $name)->first();
@@ -101,7 +101,7 @@ class MeController {
         $module->action_delete &= $permission->action_delete;
         $module->action_export &= $permission->action_export;
 
-        return $response->withJson($modules);
+        return $response->withJson($module);
     }
 
 }

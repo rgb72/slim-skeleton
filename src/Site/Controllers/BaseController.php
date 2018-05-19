@@ -2,19 +2,15 @@
 
 namespace App\Site\Controllers;
 
-use App\Services\Service;
-
 class BaseController {
 
     protected $container;
     protected $view;
-    protected $service;
     protected $config;
 
     public function __construct($container) {
         $this->container = $container;
         $this->view      = $container->get('view');
-        $this->service   = new Service;
 
         $this->getConfig();
 

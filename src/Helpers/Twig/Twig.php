@@ -33,14 +33,16 @@ class Twig {
 
             $data = $static->get($match[2]);
 
-            if(!is_array($data)) return $data;
-            if(is_null($lang)) $lang = $container->lang;
-            if(in_array($lang, array_keys($data), true)) return $data[$lang];
-            if(isset($data['default'])) return $data['default'];
-            $avaliable_langs = array_intersect(array_keys($data), explode(',', getenv('LANG_AVALIABLE')));
-            if(!empty($avaliable_langs)) return $data[$avaliable_langs[0]];
-
-            return $data;
+            if(getenv('IS_MULTIPLE_LANG') !== 'false') {
+                if(!is_array($data)) return $data;
+                if(is_null($lang)) $lang = $container->lang;
+                if(in_array($lang, array_keys($data), true)) return $data[$lang];
+                if(isset($data['default'])) return $data['default'];
+                $avaliable_langs = array_intersect(array_keys($data), explode(',', getenv('LANG_AVALIABLE')));
+                if(!empty($avaliable_langs)) return $data[$avaliable_langs[0]];
+            } else {
+                return $data;
+            }
         });
     }
 

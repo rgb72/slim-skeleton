@@ -22,6 +22,9 @@ $app->group('/api', function () use ($app) {
             $app->get('/modules', Controllers\MeController::class.':modules');
             $app->get('/modules/{name}', Controllers\MeController::class.':moduleInfo');
         });
+
+        $app->post('/uploads', Controllers\UploadController::class.':store');
+
         $app->any('/{resource:.*}', RouterMapping::class);
     })->add(new AuthMiddleware);
 });
